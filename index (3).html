@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Calorie Counter</title>
+    <style>
+        /* Enhanced CSS for a more appealing look */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            text-align: center;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        .food-section {
+            background-color: #fff;
+            border: 2px solid #ccc;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .food-label {
+            font-weight: bold;
+        }
+
+        .button {
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            margin: 5px;
+            cursor: pointer;
+        }
+
+        .button:hover {
+            background-color: #45a049;
+        }
+
+        #totalCalories {
+            font-size: 24px;
+            margin: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Calorie Counter</h1>
+
+    <!-- Appetizer Section -->
+    <div class="food-section">
+        <h2>Appetizer</h2>
+        <div class="food-label">Proteins: <span id="appetizerProteins">0</span> grams</div>
+        <button class="button" onclick="changeValue('appetizerProteins', 1)">+</button>
+        <button class="button" onclick="changeValue('appetizerProteins', -1)">-</button>
+        <br>
+
+        <div class="food-label">Carbohydrates: <span id="appetizerCarbs">0</span> grams</div>
+        <button class="button" onclick="changeValue('appetizerCarbs', 1)">+</button>
+        <button class="button" onclick="changeValue('appetizerCarbs', -1)">-</button>
+        <br>
+
+        <div class="food-label">Fat: <span id="appetizerFat">0</span> grams</div>
+        <button class="button" onclick="changeValue('appetizerFat', 1)">+</button>
+        <button class="button" onclick="changeValue('appetizerFat', -1)">-</button>
+        <br>
+
+        <div class="food-label">Calories: <span id="appetizerCalories">0</span></div>
+        <br>
+        <button class="button" onclick="resetSection('appetizer')">Reset Appetizer</button>
+    </div>
+
+    <!-- Entree Section -->
+    <div class="food-section">
+        <h2>Entree</h2>
+        <div class="food-label">Proteins: <span id="entreeProteins">0</span> grams</div>
+        <button class="button" onclick="changeValue('entreeProteins', 1)">+</button>
+        <button class="button" onclick="changeValue('entreeProteins', -1)">-</button>
+        <br>
+
+        <div class="food-label">Carbohydrates: <span id="entreeCarbs">0</span> grams</div>
+        <button class="button" onclick="changeValue('entreeCarbs', 1)">+</button>
+        <button class="button" onclick="changeValue('entreeCarbs', -1)">-</button>
+        <br>
+
+        <div class "food-label">Fat: <span id="entreeFat">0</span> grams</div>
+        <button class="button" onclick="changeValue('entreeFat', 1)">+</button>
+        <button class="button" onclick="changeValue('entreeFat', -1)">-</button>
+        <br>
+
+        <div class="food-label">Calories: <span id="entreeCalories">0</span></div>
+        <br>
+        <button class="button" onclick="resetSection('entree')">Reset Entree</button>
+    </div>
+
+    <!-- Dessert Section -->
+    <div class="food-section">
+        <h2>Dessert</h2>
+        <div class="food-label">Proteins: <span id="dessertProteins">0</span> grams</div>
+        <button class="button" onclick="changeValue('dessertProteins', 1)">+</button>
+        <button class="button" onclick="changeValue('dessertProteins', -1)">-</button>
+        <br>
+
+        <div class="food-label">Carbohydrates: <span id="dessertCarbs">0</span> grams</div>
+        <button class="button" onclick="changeValue('dessertCarbs', 1)">+</button>
+        <button class="button" onclick="changeValue('dessertCarbs', -1)">-</button>
+        <br>
+
+        <div class="food-label">Fat: <span id="dessertFat">0</span> grams</div>
+        <button class="button" onclick="changeValue('dessertFat', 1)">+</button>
+        <button class="button" onclick="changeValue('dessertFat', -1)">-</button>
+        <br>
+
+        <div class="food-label">Calories: <span id="dessertCalories">0</span></div>
+        <br>
+        <button class="button" onclick="resetSection('dessert')">Reset Dessert</button>
+    </div>
+
+    <h2>Total Calories: <span id="totalCalories">0</span></h2>
+
+    <button class="button" onclick="resetAll()">Reset All</button>
+
+    <script>
+        // JavaScript functions for functionality
+        function changeValue(elementId, value) {
+            const element = document.getElementById(elementId);
+            let newValue = parseInt(element.textContent) + value;
+            if (newValue < 0) {
+                newValue = 0;
+            }
+            element.textContent = newValue;
+            updateCalories();
+        }
+
+        function updateCalories() {
+            const appetizerProteins = parseInt(document.getElementById('appetizerProteins').textContent);
+            const appetizerCarbs = parseInt(document.getElementById('appetizerCarbs').textContent);
+            const appetizerFat = parseInt(document.getElementById('appetizerFat').textContent);
+            const appetizerCalories = (appetizerFat * 9) + (appetizerCarbs * 4) + (appetizerProteins * 4);
+            document.getElementById('appetizerCalories').textContent = appetizerCalories;
+
+            const entreeProteins = parseInt(document.getElementById('entreeProteins').textContent);
+            const entreeCarbs = parseInt(document.getElementById('entreeCarbs').textContent);
+            const entreeFat = parseInt(document.getElementById('entreeFat').textContent);
+            const entreeCalories = (entreeFat * 9) + (entreeCarbs * 4) + (entreeProteins * 4);
+            document.getElementById('entreeCalories').textContent = entreeCalories;
+
+            const dessertProteins = parseInt(document.getElementById('dessertProteins').textContent);
+            const dessertCarbs = parseInt(document.getElementById('dessertCarbs').textContent);
+            const dessertFat = parseInt(document.getElementById('dessertFat').textContent);
+            const dessertCalories = (dessertFat * 9) + (dessertCarbs * 4) + (dessertProteins * 4);
+            document.getElementById('dessertCalories').textContent = dessertCalories;
+
+            // Calculate and update total calories
+            const totalCalories = appetizerCalories + entreeCalories + dessertCalories;
+            document.getElementById('totalCalories').textContent = totalCalories;
+        }
+
+        function resetSection(section) {
+            document.getElementById(`${section}Proteins`).textContent = '0';
+            document.getElementById(`${section}Carbs`).textContent = '0';
+            document.getElementById(`${section}Fat`).textContent = '0';
+            document.getElementById(`${section}Calories`).textContent = '0';
+            updateCalories();
+        }
+
+        function resetAll() {
+            // Reset all sections
+            resetSection('appetizer');
+            resetSection('entree');
+            resetSection('dessert');
+        }
+    </script>
+</body>
+</html>
